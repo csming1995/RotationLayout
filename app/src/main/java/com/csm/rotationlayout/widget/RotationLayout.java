@@ -15,6 +15,7 @@ public class RotationLayout extends FrameLayout {
 
     private Context mContext;
 
+    //旋转动画
     private ValueAnimator rotationValueAnimator;
 
     public RotationLayout(@NonNull Context context) {
@@ -30,14 +31,23 @@ public class RotationLayout extends FrameLayout {
         mContext = context;
     }
 
+    /**
+     * 外部使用接口；传入起始角度和结束角度
+     * @param startRotation 起始角度
+     * @param endRotation 结束角度
+     */
     public void setRotation(float startRotation, float endRotation) {
-        if (null != rotationValueAnimator && rotationValueAnimator.isRunning()){
-
-        }else {
+        if (null == rotationValueAnimator || !rotationValueAnimator.isRunning()){
             startAnimator(startRotation, endRotation);
         }
     }
 
+
+    /**
+     * 开始动画；并对动画作初始化操作；
+     * @param startRotation
+     * @param endRotation
+     */
     private void startAnimator(float startRotation, float endRotation){
         rotationValueAnimator = ValueAnimator.ofFloat(startRotation, endRotation);
         rotationValueAnimator.setDuration(500);
@@ -51,6 +61,9 @@ public class RotationLayout extends FrameLayout {
         rotationValueAnimator.start();
     }
 
+    /**
+     * 取消动画
+     */
     private void stopAnimator(){
         if (null != rotationValueAnimator){
             rotationValueAnimator.cancel();

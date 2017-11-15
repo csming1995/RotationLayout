@@ -15,6 +15,9 @@ public class RotationLayout extends FrameLayout {
 
     private Context mContext;
 
+    private int mHeight;
+    private int mWidth;
+
     //旋转动画
     private ValueAnimator rotationValueAnimator;
 
@@ -42,6 +45,23 @@ public class RotationLayout extends FrameLayout {
         }
     }
 
+    @Override
+    public void setPivotX(float pivotX) {
+        super.setPivotX(pivotX);
+    }
+
+    @Override
+    public void setPivotY(float pivotY) {
+        super.setPivotY(pivotY);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+        mWidth = MeasureSpec.getSize(widthMeasureSpec);
+        mHeight = MeasureSpec.getSize(heightMeasureSpec);
+    }
 
     /**
      * 开始动画；并对动画作初始化操作；
@@ -56,6 +76,7 @@ public class RotationLayout extends FrameLayout {
             public void onAnimationUpdate(ValueAnimator animation) {
                 float value = (float) animation.getAnimatedValue();
                 RotationLayout.super.setRotation(value);
+
             }
         });
         rotationValueAnimator.start();

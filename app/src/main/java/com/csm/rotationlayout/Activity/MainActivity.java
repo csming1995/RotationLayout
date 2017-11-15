@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int width = rotationLayout.getMeasuredWidth();
+                rotationLayout.setPivotX(width/2);
+                rotationLayout.setPivotY(width/2);
                 if (ROTATION_STATUS_NORMAL == rotationStatus) {
                     rotationLayout.setRotation(0, 90);
                     rotationStatus = ROTATION_STATUS_HORIZONTAL;
